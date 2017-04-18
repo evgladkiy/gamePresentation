@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/blood.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<br>
+					<h2>Silly Zombies</h2>
+					<br>
+					<p style="text-align: right;">
+						<small>by <a href="https://github.com/evgladkiy" target="_blank">Yauheni Hladkiy</a></small>
+					</p>
+				</section>
+
+				<section>
+					<br>
+					<p> Silly zombies is a game in the genre of mixture of runner and slasher, the condition of victory is to survive, kill the Boss and as many zombies as possible</p>
+				</section>
+
+				<section>
+					<h2>Controls</h2>
+					<img width="100%" data-src="./img/controls.png" >
+				</section>
+
+				<section>
+					<section>
+						<h3>Technologies</h3>
+						<br>
+						<ul>
+							<li>Pure JavaScript;</li>
+							<li>HTML5 Canvas;</li>
+							<li>CSS3, Web Audio API;</li>
+							<li>Webpack, Babel;</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<h2>Problems</h2>
+				</section>
+
+				<section>
+					<h4>Problem of drawing images</h4>
+					<br>
+					<pre style="font-size:19px"><code class="hljs" data-trim contenteditable>
+        				ctx.drawImage(hero.img, hero.currentState.startX + (hero.currentState.width * 
+        				  hero.currentState.currentSpriteImg), hero.currentState.startY + hero.leftDy, 
+        				  hero.currentState.width, hero.currentState.height, hero.positionX + 
+        				  hero.currentState.dx + hero.currentState.correctLeftDx, hero.positionY +
+        				  hero.currentState.dy, hero.currentState.width, hero.currentState.height)
+					</code></pre>
+
+				</section>
+				<section>
+					<h4>Problem with a pause game</h4>
+					<br>
+						<pre style="font-size:19px"><code class="hljs" data-trim contenteditable>
+class Timeout {
+    constructor(callback, delay) {
+        this.callback = callback;
+        this.timerId = null;
+        this.start = null;
+        this.remaining = delay;
+    };
+
+    pause() {
+        clearTimeout(this.timerId);
+        this.remaining -= new Date() - this.start;
+    };
+
+    resume() {
+        this.start = new Date();
+        clearTimeout(this.timerId);
+        this.timerId = setTimeout(this.callback, this.remaining);
+    };
+
+    init() {
+        this.resume();
+    };
+};
+					</code></pre>
+				</section>
+
+				<section>
+					<h3><a href="https://evgladkiy.github.io/canvasGame/" target="_blank">Demo</a></h3>
+				</section>
+				<section>
+					<h3>Thank you for attention!</h3>
+				</section>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+				transition: 'convex', // none/fade/slide/convex/concave/zoom
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
